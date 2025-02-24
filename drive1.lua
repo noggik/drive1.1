@@ -48,5 +48,5 @@ while true do
             tween.Completed:Wait() -- รอให้ Tween จบก่อน
         end
     end
-    task.wait(180) -- รอ 3 นาทีแล้วทำใหม่
+    task.wait(50) -- รอ 3 นาทีแล้วทำใหม่
 end
