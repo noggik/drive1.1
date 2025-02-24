@@ -1,7 +1,7 @@
 local HttpService = game:GetService("HttpService")
 local AnalyticsService = game:GetService("RbxAnalyticsService")
-local API_URL = "http://your-api.com/check"
-local SCRIPT_URL = "http://your-api.com/script"
+local API_URL = "http://127.0.0.1:5000/check"
+local SCRIPT_URL = "https://raw.githubusercontent.com/noggik/drive1.1/refs/heads/main/deive2.lua"
 
 local function getHWID()
     return AnalyticsService:GetClientId()
