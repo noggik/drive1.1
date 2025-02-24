@@ -1,0 +1,58 @@
+local HttpService = game:GetService("HttpService")
+local AnalyticsService = game:GetService("RbxAnalyticsService")
+local API_URL = "http://your-api.com/check"
+local SCRIPT_URL = "http://your-api.com/script"
+
+local function getHWID()
+    return AnalyticsService:GetClientId()
+end
+
+local function checkWhitelist(userKey, callback)
+    local hwid = getHWID()
+    local success, response = pcall(function()
+        return HttpService:GetAsync(API_URL .. "?key=" .. userKey .. "&hwid=" .. hwid)
+    end)
+
+    if success then
+        local data = HttpService:JSONDecode(response)
+        callback(data.success, data.message)
+    else
+        callback(false, "API Error")
+    end
+end
+
+local function loadMainScript()
+    local success, scriptContent = pcall(function()
+        return game:HttpGet(SCRIPT_URL, true)
+    end)
+
+    if success and scriptContent then
+        local func = loadstring(scriptContent)
+        if func then
+            func()
+        else
+            warn("❌ Failed to execute main script!")
+        end
+    else
+        warn("❌ Unable to load main script!")
+    end
+end
+
+SubmitButton.MouseButton1Click:Connect(function()
+    local userKey = KeyInput.Text
+    if userKey == "" then
+        StatusLabel.Text = "⚠️ กรุณาใส่คีย์"
+        return
+    end
+
+    checkWhitelist(userKey, function(success, message)
+        if success then
+            StatusLabel.Text = "✅ เข้าสู่ระบบสำเร็จ!"
+            wait(1)
+            ScreenGui:Destroy()
+            loadMainScript()
+        else
+            StatusLabel.Text = "❌ " .. message
+        end
+    end)
+end)
