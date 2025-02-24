@@ -1,4 +1,4 @@
-wait(5)
+wait(20)
 
 while true do
     pcall(function()
