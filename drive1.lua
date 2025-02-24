@@ -52,7 +52,7 @@ while true do
                 v.Main.CFrame = CFrame.new(0, 200, 0)
                 local tween = game:GetService("TweenService"):Create(
                     v.Main, 
-                    TweenInfo.new(40, Enum.EasingStyle.Linear), 
+                    TweenInfo.new(30, Enum.EasingStyle.Linear), 
                     {CFrame = CFrame.new(-17.2, 32.3, -3.17)}
                 )
                 tween:Play()
