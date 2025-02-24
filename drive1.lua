@@ -1,3 +1,5 @@
+wait(5)
+
 while true do
     pcall(function()
         local player = game.Players.LocalPlayer
